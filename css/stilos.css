@@ -1,0 +1,334 @@
+/* Variables de colores */
+:root {
+    --color-primary: #2E8B57; /* Verde oscuro para plantas */
+    --color-primary-dark: #1B5E20;
+    --color-secondary: #FFD700; /* Dorado para acentos */
+    --color-secondary-dark: #E6C200;
+    --color-gray-light: #F5F5F5;
+    --color-gray: #cccccc;
+    --color-gray-dark: #999999;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    background: url("https://www.lavanguardia.com/files/og_thumbnail/uploads/2022/02/19/621138969f642.jpeg") center/cover no-repeat;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    position: relative;
+}
+
+header::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    z-index:0;
+}
+
+header h1,
+header p{
+    position:relative;
+    z-index:1;
+}
+
+.navbar {
+    background: #2e7d32;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    position: relative;
+    z-index: 10; /* Asegura que la barra de navegación esté delante */
+    
+}
+
+/* MENÚ DESKTOP */
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 9px 0;
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: #ffd54f;
+}
+
+/* BOTÓN HAMBURGUESA */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 15px;
+    align-self: flex-end;
+    z-index: 20; /* Asegura que el botón hamburguesa esté delante */
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 4px 0;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+    .menu {
+        flex-direction: column;
+        width: 100%;
+        display: none; /* oculto inicialmente */
+        background: #2e7d32;
+        position: absolute; /* Cambiado para superponerse a la imagen */
+        top: 60px; /* Ajusta según la altura de la barra de navegación */
+        right: 0;
+        border-radius: 5px;
+        z-index: 5; /* Asegura que el menú esté delante de la imagen */
+    }
+
+    .menu a {
+        width: 100%;
+        text-align: center;
+        padding: 15px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        
+    }
+
+    .hamburger {
+        display: flex; 
+    }
+
+    
+    #menu-toggle:checked ~ .menu {
+        display: flex;
+        animation: slideDown 0.3s ease; 
+    }
+}
+
+
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+
+aside {
+    flex: 1;
+    min-width: 300px;
+    margin-right: 20px;
+}
+
+.main {
+    flex: 2;
+    min-width: 400px;
+}
+
+
+@media screen and (max-width: 700px) {
+    .row {
+        flex-direction: column;
+    }
+    aside {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    .main {
+        order: 2;
+    }
+    aside {
+        order: 1;
+    }
+}
+
+/* Aside */
+aside {
+    background-color: rgb(15, 212, 153);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+aside h3 {
+    margin-top: 20px;
+}
+
+.video-link {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.video-img {
+    width: 100%;
+    max-width: 400px;
+    height: 250px;
+}
+
+/* Flip card en aside */
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 300px;
+    perspective: 1000px;
+    margin-bottom: 20px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    background-color: #bbb;
+    color: black;
+}
+
+.flip-card-back {
+    background-color: var(--color-primary);
+    color: rgb(255, 255, 255);
+    transform: rotateY(180deg);
+    border-radius: 10px;
+    padding: 25px;
+    font-size: 1vw; /* Relativo para responsive */
+}
+
+.flip-card-back h2 {
+    color: rgb(255, 255, 255);
+}
+
+/* Responsive ajustes para flip card */
+@media screen and (max-width: 700px) {
+    .flip-card-back {
+        font-size: 3vw; 
+        padding: 15px;
+    }
+    .flip-card {
+        height: 200px; /* Ajustado para móvil */
+    }
+}
+
+/* Main content */
+.main {
+    background-color: rgb(77, 185, 149);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.main article {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-gray);
+}
+
+.article-img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.main h2 {
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+.main p {
+    margin-bottom: 10px;
+}
+
+.read-more {
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.more-posts {
+    display: block;
+    text-align: center;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--color-primary-dark);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.subscribe {
+    background-color: var(--color-secondary);
+    color: black;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
